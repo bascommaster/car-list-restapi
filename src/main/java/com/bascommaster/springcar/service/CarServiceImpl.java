@@ -2,12 +2,15 @@ package com.bascommaster.springcar.service;
 
 import com.bascommaster.springcar.model.Car;
 import com.bascommaster.springcar.model.Color;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+@Service
 public class CarServiceImpl implements CarService {
 
     @Override
