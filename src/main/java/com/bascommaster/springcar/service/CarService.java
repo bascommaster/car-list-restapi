@@ -10,4 +10,5 @@ public interface CarService {
     List<Car>  getAllCars();
     Optional<Car> getCarById(long id);
     List<Car> getCarByColor(String color);
+
 }

@@ -1,5 +1,6 @@
 package com.bascommaster.springcar.model;
 
+
 import org.springframework.hateoas.ResourceSupport;
 
 public class Car extends ResourceSupport {

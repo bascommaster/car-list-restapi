@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class CarServiceImpl implements CarService {
 
+
+
     @Override
     public List<Car> getAllCars() {
 
@@ -36,13 +38,15 @@ public class CarServiceImpl implements CarService {
 
     }
 
-    private List<Car> createCarList(){
 
+
+    private List<Car> createCarList(){
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car(1L, "Polonez", "Caro",Color.BLUE));
+
+        carList.add(new Car(1L, "Polonez", "Caro",Color.WHITE));
         carList.add(new Car(2L, "Oper", "Corsa",Color.RED));
-        carList.add(new Car(3L, "Audi", "A8",Color.SILVER));
-        carList.add(new Car(4L, "Fiat", "Panda",Color.WHITE));
+        carList.add(new Car(3L, "Audi", "A8",Color.RED));
+        carList.add(new Car(4L, "Fiat", "Panda",Color.SILVER));
 
         return carList;
     }

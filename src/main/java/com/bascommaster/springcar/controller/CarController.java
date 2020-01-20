@@ -1,11 +1,17 @@
 package com.bascommaster.springcar.controller;
 
 
+import com.bascommaster.springcar.model.Car;
+import com.bascommaster.springcar.model.Color;
 import com.bascommaster.springcar.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/cars", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -18,6 +24,36 @@ public class CarController {
         this.carService=carService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<Car>>getCars(){
+        List<Car> carList = carService.getAllCars();
+        return new ResponseEntity<>(carList, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Car> getById(@PathVariable long id){
+
+        Optional<Car> car = carService.getCarById(id);
+
+        if(car.isPresent()){
+            return new ResponseEntity<>(car.get(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/color/{color}")
+    public ResponseEntity<List<Car>> getByColor(@PathVariable String color){
+
+        List<Car> cars = carService.getCarByColor(color);
+
+        if(!cars.isEmpty()){
+            return new ResponseEntity<>(cars, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
 }
