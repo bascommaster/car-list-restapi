@@ -2,7 +2,6 @@ package com.bascommaster.springcar.service;
 
 import com.bascommaster.springcar.model.Car;
 import com.bascommaster.springcar.model.Color;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class CarServiceImpl implements CarService {
 
 
     public CarServiceImpl() {
-        this.carList = new ArrayList<>();
+        carList = new ArrayList<>();
 
         carList.add(new Car(1L, "Polonez", "Caro",Color.WHITE));
         carList.add(new Car(2L, "Oper", "Corsa",Color.RED));
@@ -36,7 +35,7 @@ public class CarServiceImpl implements CarService {
     public Optional<Car> getCarById(long id) {
         return carList
                 .stream()
-                .filter(car -> car.getCarId()==id)
+                .filter(car -> car.getId()==id)
                 .findFirst();
     }
 
@@ -47,6 +46,11 @@ public class CarServiceImpl implements CarService {
                 .filter(car -> color.equalsIgnoreCase(car.getColor().name()))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public boolean addCar(Car car){
+        return carList.add(car);
     }
 
 

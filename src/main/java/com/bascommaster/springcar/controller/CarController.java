@@ -56,4 +56,14 @@ public class CarController {
     }
 
 
+    @PostMapping
+    public ResponseEntity<Car> addNewCar(@RequestBody Car newCar) {
+
+        if(carService.addCar(newCar)){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
