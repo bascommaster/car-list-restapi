@@ -11,5 +11,6 @@ public interface CarService {
     Optional<Car> getCarById(long id);
     List<Car> getCarByColor(String color);
     boolean addCar(Car car);
+    boolean delCar(long id);
 
 }

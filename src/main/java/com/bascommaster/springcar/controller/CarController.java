@@ -66,4 +66,13 @@ public class CarController {
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Car> delCarById(@PathVariable long id){
+
+       if(carService.delCar(id)){
+           return new ResponseEntity<>(HttpStatus.OK);
+       }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
 }
