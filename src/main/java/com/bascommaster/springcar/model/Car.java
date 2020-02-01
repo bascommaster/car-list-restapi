@@ -7,9 +7,9 @@ public class Car{
     private long id;
     private String mark;
     private String model;
-    private Color color;
+    private String color;
 
-    public Car(long id, String mark, String model, Color color) {
+    public Car(long id, String mark, String model, String color) {
         this.id = id;
         this.mark = mark;
         this.model = model;
@@ -43,20 +43,20 @@ public class Car{
         this.model = model;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "carId=" + id +
-                ", mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
+                "id=" + id +
+                ", mark=" + mark +
+                ", model=" + model +
                 ", color=" + color +
                 '}';
     }

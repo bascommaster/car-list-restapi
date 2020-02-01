@@ -2,7 +2,6 @@ package com.bascommaster.springcar.controller;
 
 
 import com.bascommaster.springcar.model.Car;
-import com.bascommaster.springcar.model.Color;
 import com.bascommaster.springcar.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/cars", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/api", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 public class CarController {
 
     private CarService carService;
@@ -24,14 +23,14 @@ public class CarController {
         this.carService=carService;
     }
 
-    @GetMapping
+    @GetMapping("/cars")
     public ResponseEntity<List<Car>>getCars(){
         List<Car> carList = carService.getAllCars();
         return new ResponseEntity<>(carList, HttpStatus.OK);
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/cars/{id}")
     public ResponseEntity<Car> getById(@PathVariable long id){
 
         Optional<Car> car = carService.getCarById(id);
@@ -43,7 +42,7 @@ public class CarController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/color/{color}")
+    @GetMapping("/cars/color/{color}")
     public ResponseEntity<List<Car>> getByColor(@PathVariable String color){
 
         List<Car> cars = carService.getCarByColor(color);
@@ -56,9 +55,8 @@ public class CarController {
     }
 
 
-    @PostMapping
+    @PostMapping("/cars")
     public ResponseEntity<Car> addNewCar(@RequestBody Car newCar) {
-
         if(carService.addCar(newCar)){
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -66,7 +64,7 @@ public class CarController {
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/cars/{id}")
     public ResponseEntity<Car> delCarById(@PathVariable long id){
 
        if(carService.delCar(id)){

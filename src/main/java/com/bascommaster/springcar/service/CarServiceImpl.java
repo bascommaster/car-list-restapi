@@ -1,7 +1,7 @@
 package com.bascommaster.springcar.service;
 
 import com.bascommaster.springcar.model.Car;
-import com.bascommaster.springcar.model.Color;
+import com.sun.javaws.IconUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,15 +14,17 @@ import java.util.stream.Collectors;
 public class CarServiceImpl implements CarService {
 
     private List<Car> carList;
-
+    private static int counter =7;
 
     public CarServiceImpl() {
         carList = new ArrayList<>();
 
-        carList.add(new Car(1L, "Polonez", "Caro", Color.WHITE));
-        carList.add(new Car(2L, "Oper", "Corsa", Color.RED));
-        carList.add(new Car(3L, "Audi", "A8", Color.RED));
-        carList.add(new Car(4L, "Fiat", "Panda", Color.SILVER));
+        carList.add(new Car(1L, "Polonez", "Caro","white"));
+        carList.add(new Car(2L, "Opel", "Corsa", "red"));
+        carList.add(new Car(3L, "Opel", "Insignia", "blue"));
+        carList.add(new Car(4L, "Audi", "A8", "red"));
+        carList.add(new Car(5L, "Fiat", "Panda", "white"));
+        carList.add(new Car(6L, "Fiat", "Panda", "silver"));
     }
 
     @Override
@@ -43,14 +45,24 @@ public class CarServiceImpl implements CarService {
     public List<Car> getCarByColor(String color) {
         return carList
                 .stream()
-                .filter(car -> color.equalsIgnoreCase(car.getColor().name()))
+                .filter(car -> color.equalsIgnoreCase(car.getColor()))
                 .collect(Collectors.toList());
 
     }
 
     @Override
-    public boolean addCar(Car car) {
-        return carList.add(car);
+    public boolean addCar(Car newCar) {
+
+         if(carList.add(newCar)){
+             int size=carList.size();
+             System.out.println("rozmiar tablicy: "+ size);
+             System.out.println("sotatni samochód: " + (carList.indexOf(newCar)+1));
+
+             carList.get(size-1).setId(counter++);
+             return true;
+         }
+
+        return false;
     }
 
     @Override
