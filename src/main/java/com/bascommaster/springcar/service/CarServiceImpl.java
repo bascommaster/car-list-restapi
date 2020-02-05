@@ -56,7 +56,7 @@ public class CarServiceImpl implements CarService {
          if(carList.add(newCar)){
              int size=carList.size();
              System.out.println("rozmiar tablicy: "+ size);
-             System.out.println("sotatni samochód: " + (carList.indexOf(newCar)+1));
+             System.out.println("otatni samochód: " + (carList.indexOf(newCar)+1));
 
              carList.get(size-1).setId(counter++);
              return true;

@@ -1,6 +1,7 @@
 package com.bascommaster.springcar.controller;
 
 
+import com.bascommaster.springcar.exceptin.CarNotFoundException;
 import com.bascommaster.springcar.model.Car;
 import com.bascommaster.springcar.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +32,10 @@ public class CarController {
 
 
     @GetMapping("/cars/{id}")
-    public ResponseEntity<Car> getById(@PathVariable long id){
+    public Car getById(@PathVariable long id){
 
-        Optional<Car> car = carService.getCarById(id);
+        return carService.getCarById(id).orElseThrow(() -> new CarNotFoundException(id));
 
-        if(car.isPresent()){
-            return new ResponseEntity<>(car.get(), HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/cars/color/{color}")
